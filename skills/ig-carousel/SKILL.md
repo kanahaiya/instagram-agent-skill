@@ -24,7 +24,7 @@ framework with parts, a before and after, a list worth screenshotting. Use a
 Reel when the idea has motion, a face, or a payoff that has to be seen
 happening.
 
-If the idea is one claim, it is neither. Hand it to `/ig-reel` and say so.
+If the idea is one claim, it is neither. Hand it to /ig-reel and say so.
 
 ## Structure
 
@@ -46,58 +46,63 @@ LAST      CTA       one action. Save, comment a keyword, or follow. One.
 
 - **The cover is 80% of the result.** Six words. Big. Nothing on the deck saves
   a cover nobody swipes.
-- **Design for the grid crop.** The profile grid crops to a portrait rectangle
-  that is taller than it is wide, and the exact ratio has moved more than once.
-  Build at 1080x1350 and keep the cover text well inside the middle, clear of
-  the outer 120 pixels on every side, and the crop stops mattering.
+- **Design for the grid crop.** Build at 1080x1350 and keep the cover text well
+  inside the middle, clear of the outer 120 pixels on every side.
 - **Number the slides** (3/8). Completion goes up when people can see the end.
 - **No slide is a paragraph.** If it cannot be said in 25 words, split it.
-- **The recap slide is the one people screenshot and send.** Sends are the
-  strongest signal you can earn. Make it standalone and readable with no
-  context.
-- **The handle on every slide**, small, bottom corner. Screenshots travel
-  without you.
-- **Alt text on the cover at minimum.** It is read by screen readers and by
-  Instagram.
+- **The recap slide is the one people screenshot and send.** Make it standalone
+  and readable with no context.
+- **The handle on every slide**, small, bottom corner.
+- **Alt text on the cover at minimum.**
 
 ## Building the files
 
-Instagram wants 1080x1350 (4:5), JPEG or PNG, up to 20 items. Build it as HTML
-and print each slide:
-
-```bash
-# one <section> per slide, 1080x1350, page-break-after: always
-# then Chrome headless --print-to-pdf, or any HTML-to-image you already use
-```
-
-Write the HTML with `width:1080px; height:1350px`, a single accent colour, and
-type no smaller than 32px, because this is read on a phone at a third of its
-real size. If the project has a brand skill or a design system, use it and do
-not invent a palette.
+Build each slide at 1080x1350 (4:5), JPEG or PNG. Use the existing project
+renderer and brand system; do not introduce a new palette or dependency.
 
 ## Output
 
-The slide-by-slide copy first, as a numbered list the user can read in ten
-seconds and edit before anything is rendered. Then the **caption**, which for a
-carousel is Job B in `/ig-caption`: the caption is doing work here, because the
-cover has already used its six words.
+Present the slide-by-slide copy first, then the caption. Run both through
+/ig-human. Build the files only after the user approves the copy.
 
-Run both through `/ig-human`. Build the files only after the user approves the
-copy.
+## Required freebie analysis
+
+After drafting the slide copy and caption, invoke /ig-freebie-analyzer on the
+complete carousel draft before presenting the final carousel receipt. Pass the
+slide copy, caption, target audience (if known), language, and current CTA.
+The analyzer must run for every carousel, including posts whose CTA does not
+mention a freebie.
+
+Include the analyzer's result in the carousel output:
+- If YES: show the recommended freebie, score, why it adds value, suggested
+  keyword, and a draft CTA clearly marked "use only after the asset exists".
+- If NO: show the short reason and score.
+- If REVIEW: show what needs human judgement.
+Do not silently omit this step. If the analyzer skill is unavailable, say so
+and include a brief provisional assessment rather than claiming it ran.
+
+This is recommendation only. Do not automatically create a PDF, change the
+caption, publish the post, or send messages unless the user explicitly asks
+for those actions. A freebie CTA must never promise delivery of an asset that
+has not been created and reviewed.
+
+## Output receipt
 
 ```
-CAROUSEL  ·  8 slides
+CAROUSEL · 8 slides
 
-1  COVER   THE $18,000 CLAUSE
-           One line I now put in every contract.
-2  STAKE   I approved the work. They asked for the money back nine days later.
-3          WHAT IT SAYS
-           Payment on delivery, not on approval.
+1 COVER ...
 ...
-7  RECAP   All four lines, in order.
-8  CTA     Comment CONTRACT and I will send the full clause.
 
-Caption: Job B, hook in line 1, one ask, 3 tags.
+Caption: ...
+
+FREEBIE ANALYSIS
+decision: YES / NO / REVIEW
+score: NN/100
+reason: ...
+recommended asset: ...
+keyword: ...
+CTA: draft only until the asset exists and is reviewed
+
+Nothing is posted. The user reviews and posts it.
 ```
-
-Nothing is uploaded. The user posts it.
