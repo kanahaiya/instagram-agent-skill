@@ -1,13 +1,14 @@
 # The Instagram agent skill
 
-Thirteen Claude skills that run an Instagram account. Free, MIT, no signup, no
-API key, nothing to connect.
+Fourteen agent skills that run an Instagram account. Free, MIT, no signup, no
+API key, nothing to connect. Works seamlessly in Claude Code and Google Antigravity.
 
 One of them writes your Reels off 26 hook formulas and scores the hook before
 you waste a take on it. One goes and finds the reels that are actually working
 in your niche and ranks them by how far each beat its own account. One writes
 the caption and shows you exactly what the feed shows before the "... more".
-One scores your profile out of 100 and rewrites what lost points. One plans the
+One scores your profile out of 100 and rewrites what lost points. One analyzes
+whether your carousel merits a high-converting freebie lead magnet. One plans the
 week.
 
 And one is the humanizer, which is the reason the rest are usable. It strips
@@ -19,47 +20,46 @@ see it.
 
 ## Install
 
-Paste this into Claude:
+[https://github.com/kanahaiya/instagram-agent-skill](https://github.com/kanahaiya/instagram-agent-skill)
 
-```
-https://github.com/Jakeschincariol/instagram-agent-skill
-
-Install this skill, then confirm /ig-reel works.
-```
-
-Or do it yourself, in Claude Code:
+### Manual install (Claude Code)
 
 ```bash
-git clone https://github.com/Jakeschincariol/instagram-agent-skill.git
+git clone https://github.com/kanahaiya/instagram-agent-skill.git
 cp -r instagram-agent-skill/skills/ig-* ~/.claude/skills/
 ```
 
-Or as a plugin:
+### Plugin install (Claude Code)
 
-```
-/plugin marketplace add Jakeschincariol/instagram-agent-skill
+```bash
+/plugin marketplace add kanahaiya/instagram-agent-skill
 /plugin install instagram-agent
 ```
 
+### Google Antigravity
+
+In Google Antigravity, workspace skills are automatically discovered and loaded out-of-the-box from `.agents/skills/`.
+
 Project-local instead of global: copy the same folders into your repo's
-`.claude/skills/`. No Claude Code at all? Paste any single `SKILL.md` at the top
+`.claude/skills/` or `.agents/skills/`. No assistant platform at all? Paste any single `SKILL.md` at the top
 of a chat and it runs as a mode. You lose the five Python tools, which is most
 of the point of `/ig-reel` and `/ig-human`, but the rest works.
 
 Then spend ten minutes on `templates/voice.md`. Copy it to
-`~/.claude/instagram/voice.md` and fill it in, or send Claude three of your own
+`~/.claude/instagram/voice.md` (or keep it in `templates/voice.md`) and fill it in, or send the assistant three of your own
 reels and say "write my voice.md from these". Every skill reads that file. It
 matters more here than on other platforms, because you have to say the words
 out loud.
 
-## The thirteen
+## The fourteen
 
 | command | what it does |
 | --- | --- |
 | `/ig-reel` | One idea into a Reel. Three hooks from [26 formulas](skills/ig-reel/hooks.json), scored, then the script, the on-screen text and a timed beat sheet. |
 | `/ig-viral` | Goes and finds what is working in your niche, ranks it by multiple over each account's own median, names the formula, writes the swipe file. |
 | `/ig-caption` | The caption, linted. Shows you the 125 characters the feed actually shows before the tap. |
-| `/ig-carousel` | Swipe posts. The cover that earns the swipe, slide copy, and the 1080x1350 files. |
+| `/ig-carousel` | Swipe posts. The cover that earns the swipe, slide copy, and the 1080x1350 files. Automatically triggers `/ig-freebie-analyzer`. |
+| `/ig-freebie-analyzer` | Decides whether a post merits a freebie, scores audience value, picks the asset format, and drafts the keyword CTA and DM brief. |
 | `/ig-story` | The daily story sequence, which sticker does which job, and the DM funnel that starts with them moving first. |
 | `/ig-profile` | Scores your profile against a [12-part rubric](skills/ig-profile/rubric.json) out of 100, then rewrites in fix-first order. |
 | `/ig-plan` | The week. What to post, which format, when, and the 10 accounts to engage with. |
